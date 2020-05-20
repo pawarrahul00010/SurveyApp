@@ -34,7 +34,8 @@ class SurveyRespondant(models.Model):
 class Survey(models.Model):   
     status = models.CharField(max_length=100, default='open',)  
     surveyCoordinator = models.ForeignKey(SurveyCoordinator, related_name='surveys', db_column='coordinator_id', on_delete=models.CASCADE, default=5,)
-    surveyjson = models.CharField(max_length=9000)  
+    surveyjson = models.CharField(max_length=9000)
+    surveyType = models.CharField(max_length=9000)  
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:  

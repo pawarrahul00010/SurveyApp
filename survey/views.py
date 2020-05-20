@@ -162,10 +162,10 @@ def getSurveyResultCountbyid(request,id):
 def getSurveyCount(request,id):
     cursor = connection.cursor()
     cursor.execute("SELECT \
-                    question,type, choice, COUNT(*) AS choicecount \
+                    question.question, question.type, answer.choice, COUNT(*) AS choicecount \
                     FROM survey INNER JOIN  response ON survey.id=response.survey_id \
                     INNER JOIN question ON response.id=question.response_id \
-                    INNER JOIN answer ON question.id=answer.question_id WHERE survey.Id=1 GROUP BY answer.choice ORDER BY question")
+                    INNER JOIN answer ON question.id=answer.question_id WHERE survey.id=%s GROUP BY answer.choice ORDER BY question.question", [id])
 
     columns = [col[0] for col in cursor.description]
     print(columns)
